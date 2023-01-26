@@ -64,8 +64,8 @@ const Characters = () => {
                 <img src="https://profound-froyo-7826bf.netlify.app/assets/image11-4a847bec.png" alt="" />
             </div>
             <button className='navButton' onClick={back}><i className="fa-solid fa-left-long"></i></button>
-            <h1 className='welcome'>Welcome {pokes},</h1>
-            <h2 className='welcomes'> Here you can find your favorite pokemon</h2>
+            <h1 className='welcome'> <span>Welcome {pokes},</span>  Here you can find your favorite pokemon</h1>
+            
             <div>
                 <input className='search' type="text"
                     placeholder='search characters'
@@ -75,6 +75,16 @@ const Characters = () => {
                 <button className='button-pagination1' onClick={search}>
                     Search
                 </button>
+                
+                <select onChange={filterType} name="" id="">
+                    {
+                        kinds.map(kind => (
+                            <option value={kind.url} key={kind.url}>
+                                {kind.name}
+                            </option>
+                        ))
+                    }
+                </select>
             </div>
 
             <div>
@@ -91,34 +101,29 @@ const Characters = () => {
 
                 </div>
 
-                <select onChange={filterType} name="" id="">
-                    {
-                        kinds.map(kind => (
-                            <option value={kind.url} key={kind.url}>
-                                {kind.name}
-                            </option>
-                        ))
-                    }
-                </select>
+                
             </div>
 
-            {
-                pokePagination?.map(poke => (
-                    <PokeCard
-                        key={poke.pokemon?.url ? poke.pokemon?.url : poke?.url}
-                        url={poke.pokemon?.url ? poke.pokemon?.url : poke?.url}
-                    />
+            <ul className='pokemonsList'>
+                {
+                    pokePagination?.map(poke => (
+                        <PokeCard
+                            key={poke.pokemon?.url ? poke.pokemon?.url : poke?.url}
+                            url={poke.pokemon?.url ? poke.pokemon?.url : poke?.url}
+                        />
 
-                ))
-            }
+                    ))
+                }
+            </ul>
+
 
 
             {/* esto es para los botones  */}
             {
                 numbPage.map(number => (
-                  
-                        <button  key={number} className='button-number' onClick={() => setPage(number)} >{number}</button>
-                    
+
+                    <button key={number} className='button-number' onClick={() => setPage(number)} >{number}</button>
+
                 ))
             }
 
